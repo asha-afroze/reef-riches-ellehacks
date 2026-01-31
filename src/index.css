@@ -1,5 +1,15 @@
+@font-face {
+  font-family: 'FunFont'; /* A name you choose to reference the font later */
+  src: url('assets/fonts/VAG Rounded Next Shine Regular.ttf') format('truetype'); /* Path to your font file */
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

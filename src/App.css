@@ -58,7 +58,7 @@ body {
 .btn-primary {
   background: #f5e2c7;
   color: rgb(96, 41, 16);
-  border: 2px solid #915808;
+  border: 2px solid #b06c0e;
   padding: 1rem 1rem;
   border-radius: 15px;
   font-size: 1.1rem;
@@ -71,7 +71,7 @@ body {
 .btn-primary:hover {
   background: #fff29d;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 189, 83, 0.6);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
 .btn-primary:disabled {
