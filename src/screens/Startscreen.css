@@ -25,9 +25,9 @@
 }
 
 .game-title {
-  font-size: 2.5rem;
+  font-size: 2.1rem;
   color: #6a3a0a;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 @keyframes swim {

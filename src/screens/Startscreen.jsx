@@ -15,7 +15,7 @@ export default function StartScreen({ dispatch }) {
 return (
     <div className="start-screen">
         <div className="start-content">
-            <h1 className="game-title">Welcome to ReefRiches!</h1>
+            <h1 className="game-title"><strong>Welcome to ReefRiches!</strong></h1>
             <p className="tagline">Swim through the ocean of financial knowledge!</p>
 
             <div className="button-group">
