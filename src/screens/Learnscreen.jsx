@@ -1,0 +1,116 @@
+import './LearnScreen.css';
+
+// Content for each section and level
+const lessonContent = {
+  saving: {
+    1: {
+      title: "What is Saving?",
+      text: "**Saving** means keeping some of your money for later instead of spending it all now. When you save, you put money aside for something you want in the future, like a **goal**!"
+    },
+    2: {
+      title: "Why Save Money?",
+      text: "Saving helps you buy things you really want! It's like filling up a piggy bank. The more you **save**, the closer you get to your **goal**."
+    },
+    3: {
+      title: "Setting a Goal",
+      text: "A **goal** is something you're saving for. It could be a toy, a game, or even a special trip! Having a goal makes saving more fun."
+    },
+    4: {
+      title: "Patience Pays Off",
+      text: "Sometimes you have to wait to buy what you want. That's called being **patient**. When you're patient and keep saving, you'll reach your goal!"
+    },
+    5: {
+      title: "Celebrate Your Savings!",
+      text: "When you finally save enough, you can buy your goal! That feeling of **accomplishment** is amazing. You did it by being smart with your money!"
+    }
+  },
+  spending: {
+    1: {
+      title: "What is Spending?",
+      text: "**Spending** means using your money to buy things. Every time you buy something, you **spend** money. It's important to think before you spend!"
+    },
+    2: {
+      title: "Needs vs Wants",
+      text: "A **need** is something you must have, like food. A **want** is something nice to have, like candy. Learning the difference helps you spend wisely!"
+    },
+    3: {
+      title: "Smart Spending",
+      text: "**Smart spending** means thinking about whether you really need something before buying it. Ask yourself: Do I need this or just want it?"
+    },
+    4: {
+      title: "Making Good Choices",
+      text: "Every time you spend, you make a **choice**. Good choices help you save money for things that matter most to you!"
+    },
+    5: {
+      title: "Spending and Saving Balance",
+      text: "It's okay to spend money on things you enjoy! The trick is finding a **balance** between spending and saving."
+    }
+  },
+  management: {
+    1: {
+      title: "What is Money Management?",
+      text: "**Money management** means making a plan for your money. It helps you decide how much to save and how much to spend!"
+    },
+    2: {
+      title: "Making a Budget",
+      text: "A **budget** is a plan that shows how you'll use your money. It helps you keep track of what you earn, save, and spend."
+    },
+    3: {
+      title: "Tracking Your Money",
+      text: "**Tracking** means keeping count of your money. When you know how much you have, you can make better choices!"
+    },
+    4: {
+      title: "Earning Money",
+      text: "**Earning** means getting money for doing something, like chores. The money you earn is called **income**."
+    },
+    5: {
+      title: "Being Money Smart",
+      text: "When you manage your money well, you're being **responsible**! This means you're making good choices about saving, spending, and earning."
+    }
+  }
+};
+
+export default function LearnScreen({ state, dispatch }) {
+  const { currentSection, currentLevel } = state;
+  const lesson = lessonContent[currentSection]?.[currentLevel] || {
+    title: "Let's Learn!",
+    text: "Time to learn something new about money!"
+  };
+
+  // Bold key terms in text
+  const formatText = (text) => {
+    return text.split('**').map((part, index) =>
+      index % 2 === 1 ? <strong key={index}>{part}</strong> : part
+    );
+  };
+
+  return (
+    <div className="learn-screen">
+      <div className="learn-content">
+        <div className="level-badge">Level {currentLevel}</div>
+        
+        <h2 className="learn-title">{lesson.title}</h2>
+        
+        <div className="learn-text">
+          <p>{formatText(lesson.text)}</p>
+        </div>
+
+        <div className="learn-fish">🐠</div>
+
+        <button
+          className="btn-primary"
+          onClick={() => dispatch({ type: 'START_LEVEL' })}
+        >
+          Start Level {currentLevel}
+        </button>
+
+        <button
+          className="btn-secondary"
+          onClick={() => dispatch({ type: 'BACK_TO_MAP' })}
+        >
+          Back to Map
+        </button>
+      </div>
+    </div>
+  );
+}
