@@ -16,7 +16,6 @@ return (
     <div className="start-screen">
         <div className="start-content">
             <h1 className="game-title">Welcome to ReefRiches!</h1>
-            <div className="fish-icon">🐠</div>
             <p className="tagline">Swim through the ocean of financial knowledge!</p>
 
             <div className="button-group">

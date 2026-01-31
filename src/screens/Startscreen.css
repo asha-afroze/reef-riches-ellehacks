@@ -1,6 +1,7 @@
 .start-screen {
   width: 100%;
-  min-height: 100vh; /* 🔥 THIS is the key */
+  height: 100vh; /* Changed from min-height to height to lock the BG */
+  overflow: hidden; /* Prevents scrollbars from affecting the BG image */
 
   display: flex;
   justify-content: center;
@@ -14,22 +15,19 @@
 
 .start-content {
   display: flex;
-  justify-content: center;
-  padding: 3rem 3rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  flex-direction: column; /* Stacks elements vertically */
+  align-items: center;    /* Keeps elements centered horizontally */
+  text-align: center;     /* Centers the actual text lines */
+  gap: 0px;
+  
+  max-width: 600px; /* Optional: keeps the wood-sign area from getting too wide */
+  width: 90%;      /* Responsive width */
 }
 
 .game-title {
   font-size: 2.5rem;
-  color: #667eea;
+  color: #6a3a0a;
   margin-bottom: 1rem;
-}
-
-.fish-icon {
-  font-size: 5rem;
-  margin: 1rem 0;
-  animation: swim 2s ease-in-out infinite;
 }
 
 @keyframes swim {
@@ -43,7 +41,7 @@
 
 .tagline {
   font-size: 1.2rem;
-  color: #666;
+  color: #261602;
   margin-bottom: 2rem;
 }
 
