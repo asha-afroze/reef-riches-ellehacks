@@ -1,4 +1,6 @@
 import "./Resultscreen.css";
+import sharkDefeat from "../assets/sharkdefeat.jpg";
+import sharkSmirk from "../assets/sharksmirk.png";
 
 export default function ResultScreen({ state, dispatch }) {
     const { lastAnswer, currentLevel } = state;
@@ -11,9 +13,12 @@ export default function ResultScreen({ state, dispatch }) {
         <div className='result-screen'>
             <div className='result-content'>
                 <div className='battle-animation'>
-                    <span className='fish-attack'>🐠</span>
-                    <span className='bubbles'>🫧🫧🫧</span>
-                    <span className='shark'>🦈</span>
+
+                    <img 
+                        src={correct ? sharkDefeat : sharkSmirk} 
+                        alt={correct ? "Defeated Shark" : "Smirking Shark"}
+                        className='shark-img'
+                    />
                 </div>
 
                 <h2 className={`result-title ${correct ? "success" : "try-again"}`}>
