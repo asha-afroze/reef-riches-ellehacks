@@ -3,11 +3,12 @@ import sharkDefeat from "../assets/sharkdefeat.jpg";
 import sharkSmirk from "../assets/sharksmirk.png";
 
 export default function ResultScreen({ state, dispatch }) {
-    const { lastAnswer, currentLevel } = state;
+    const { lastAnswer, currentLevel, activeSession } = state;
 
     if (!lastAnswer) return null;
 
     const { correct, damage, coins, xp } = lastAnswer;
+    const sharkHp = activeSession?.hp ?? 0;
 
     return (
         <div className='result-screen'>

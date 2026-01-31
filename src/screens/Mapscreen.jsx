@@ -76,7 +76,11 @@ export default function MapScreen({ state, dispatch }) {
                                 style={{ backgroundColor: section.color }}
                                 onClick={() => handleSectionClick(section.id)}
                             >
-                                {sectionData.completed === 0 ? "Start" : "Continue"}
+                                {sectionData.completed === 0
+                                    ? "Start"
+                                    : sectionData.completed >= 5
+                                      ? "Replay"
+                                      : "Retry"}
                             </button>
                         </div>
                     );
