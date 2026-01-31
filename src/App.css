@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
   min-height: 100vh;
 }
 
@@ -110,3 +110,14 @@ body {
 .btn-text:hover {
   opacity: 0.8;
 }
+
+/* .screen-card {
+  background: white;
+  width: 100%;
+  max-width: 1000px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+} */
+

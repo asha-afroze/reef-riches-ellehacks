@@ -1,12 +1,21 @@
 .start-screen {
   width: 100%;
-  max-width: 600px;
-  text-align: center;
+  min-height: 100vh; /* 🔥 THIS is the key */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url('/src/assets/reefriches.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .start-content {
-  background: white;
-  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 3rem;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
