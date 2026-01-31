@@ -1,12 +1,12 @@
 import "./Resultscreen.css";
 
 export default function ResultScreen({ state, dispatch }) {
-    const { lastAnswer, currentLevel, currentSection, sections } = state;
+    const { lastAnswer, currentLevel, activeSession } = state;
 
     if (!lastAnswer) return null;
 
     const { correct, damage, coins, xp } = lastAnswer;
-    const sharkHp = sections[currentSection]?.hp;
+    const sharkHp = activeSession?.hp ?? 0;
 
     return (
         <div className='result-screen'>

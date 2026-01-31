@@ -22,6 +22,7 @@ const initialState = {
         management: { completed: 0, hp: 100, badge: false },
     },
     lastAnswer: null,
+    activeSession: null, 
 };
 
 // Game reducer
@@ -37,8 +38,19 @@ function gameReducer(state, action) {
             return { ...state, currentScreen: action.screen };
 
         case "START_SECTION":
+            const isBadgeEarned = state.sections[action.section].badge;
+            
             return {
                 ...state,
+                sections: isBadgeEarned ? state.sections : {
+                    ...state.sections,
+                    [action.section]: {
+                        ...state.sections[action.section],
+                        hp: 100,
+                        completed: 0,
+                    },
+                },
+                activeSession: { hp: 100, completed: 0 },
                 currentSection: action.section,
                 currentLevel: 1,
                 currentScreen: "learn",
@@ -53,18 +65,27 @@ function gameReducer(state, action) {
             const coinsEarned = isCorrect ? 10 : 3;
             const xpEarned = isCorrect ? 15 : 5;
 
+            const newActiveHp = Math.max(0, (state.activeSession?.hp || 100) - damage);
+            const newActiveCompleted = isCorrect 
+                ? (state.activeSession?.completed || 0) + 1 
+                : (state.activeSession?.completed || 0);
+
+            const isReplay = state.sections[state.currentSection].badge;
+
             return {
                 ...state,
                 coins: state.coins + coinsEarned,
                 xp: state.xp + xpEarned,
-                sections: {
+                activeSession: {
+                    hp: newActiveHp,
+                    completed: newActiveCompleted
+                },
+                sections: isReplay ? state.sections : {
                     ...state.sections,
                     [state.currentSection]: {
                         ...state.sections[state.currentSection],
-                        hp: Math.max(0, state.sections[state.currentSection].hp - damage),
-                        completed: isCorrect
-                            ? state.sections[state.currentSection].completed + 1
-                            : state.sections[state.currentSection].completed,
+                        hp: newActiveHp,
+                        completed: newActiveCompleted,
                     },
                 },
                 lastAnswer: { correct: isCorrect, damage, coins: coinsEarned, xp: xpEarned },
@@ -74,20 +95,25 @@ function gameReducer(state, action) {
         case "NEXT_LEVEL":
             const nextLevel = state.currentLevel + 1;
             if (nextLevel > 5) {
-                // Check if earned badge (all 5 levels completed)
-                const earned = state.sections[state.currentSection].completed >= 5;
+                                // Check if earned badge (all 5 levels completed)
+                const earned = (state.activeSession?.completed || 0) >= 5;
+                const wasEarned = state.sections[state.currentSection].badge;
+                
                 return {
                     ...state,
                     sections: {
                         ...state.sections,
                         [state.currentSection]: {
                             ...state.sections[state.currentSection],
-                            badge: earned || state.sections[state.currentSection].badge,
+                            badge: earned || wasEarned,
+                            completed: earned || wasEarned ? 5 : state.activeSession.completed,
+                            hp: earned || wasEarned ? 0 : state.activeSession.hp
                         },
                     },
                     currentScreen: "map",
                     currentLevel: 0,
                     currentSection: null,
+                    activeSession: null
                 };
             }
             return {
