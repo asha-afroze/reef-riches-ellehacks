@@ -167,7 +167,13 @@ function App() {
     return (
         <div className='app'>
             <div className='top-bar'>
-                <div className='logo'>🐟 ReefRiches</div>
+                <div 
+                    className='logo' 
+                    onClick={() => dispatch({ type: "SET_SCREEN", screen: "start" })}
+                    style={{ cursor: "pointer" }}
+                >
+                    🐟 ReefRiches
+                </div>
                 <div className='stats'>
                     <span className='coin-stat'>🪙 {state.coins}</span>
                     <span className='xp-stat'>⭐ {state.xp} XP</span>
