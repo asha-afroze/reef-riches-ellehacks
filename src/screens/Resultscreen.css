@@ -1,0 +1,133 @@
+.result-screen {
+  width: 100%;
+  max-width: 700px;
+}
+
+.result-content {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.battle-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+}
+
+.fish-attack {
+  animation: attack 1s ease-in-out;
+}
+
+@keyframes attack {
+  0% {
+    transform: translateX(-100px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-20px);
+  }
+}
+
+.bubbles {
+  animation: bubble 1s ease-in-out infinite;
+}
+
+@keyframes bubble {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+.shark {
+  animation: hurt 0.5s ease-in-out;
+}
+
+@keyframes hurt {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+}
+
+.result-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.result-title.success {
+  color: #4CAF50;
+}
+
+.result-title.try-again {
+  color: #ff9800;
+}
+
+.result-stats {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-weight: 600;
+  color: #666;
+}
+
+.stat-value {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.stat-value.damage {
+  color: #ff6b6b;
+}
+
+.stat-value.coins {
+  color: #ffd700;
+}
+
+.stat-value.xp {
+  color: #667eea;
+}
+
+.encouragement {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.result-content .btn-primary {
+  width: 100%;
+  max-width: 300px;
+}
