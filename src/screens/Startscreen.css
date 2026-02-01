@@ -43,7 +43,7 @@
 .game-title {
   font-family: 'FunFont', sans-serif; /* Ensuring your custom font is used */
   font-size: 3rem;
-  color: #497ae2; /* White text acts as the "bulb" of the neon light */
+  color: #64ade0; /* White text acts as the "bulb" of the neon light */
   
   /* Layered shadows create the glow effect */
   text-shadow:

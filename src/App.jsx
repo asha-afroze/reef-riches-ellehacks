@@ -172,7 +172,10 @@ function App() {
                     onClick={() => dispatch({ type: "SET_SCREEN", screen: "start" })}
                     style={{ cursor: "pointer" }}
                 >
-                    🐟 ReefRiches
+                    ✮⋆˙ Home ✮⋆˙
+                </div>
+                <div>
+                    <p>𓇼 ⋆.˚ 𓆉 𓆝 𓆡⋆.˚ 𓇼</p>
                 </div>
                 <div className='stats'>
                     <span className='coin-stat'>🪙 {state.coins}</span>

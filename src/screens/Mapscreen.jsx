@@ -3,15 +3,15 @@ import "./Mapscreen.css";
 const sections = [
     {
         id: "saving",
-        color: "#4CAF50",
+        color: "#cb7de3ff",
     },
     {
         id: "spending",
-        color: "#2196F3",
+        color: "#4cceefff",
     },
     {
         id: "management",
-        color: "#9C27B0",
+        color: "#65cd78ff",
     },
 ];
 
