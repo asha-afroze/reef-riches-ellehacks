@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Levelscreen.css";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import lessonContent from "../data/lessonContent.json";
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
@@ -109,13 +110,21 @@ export default function LevelScreen({ state, dispatch }) {
             try {
                 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
                 
+                const lesson = lessonContent[currentSection]?.[currentLevel];
+                
 const prompt = `
 *** ROLE ***
 You are an educational content creator for children aged 7-12. 
 Your tone should be engaging, simple, and age-appropriate.
 
+*** CONTEXT ***
+The child just read this lesson:
+Title: "${lesson?.title || currentSection}"
+Content: "${lesson?.text || `Learn about ${currentSection}`}"
+
 *** TASK ***
-Generate one fill-in-the-blank question about the financial literacy topic: "${currentSection}".
+Generate one fill-in-the-blank question that tests their understanding of this specific lesson.
+Focus on the key terms (marked with **bold** in the content).
 
 *** OUTPUT FORMAT ***
 Return ONLY valid raw JSON. Do NOT include markdown code blocks (e.g., \`\`\`json).
