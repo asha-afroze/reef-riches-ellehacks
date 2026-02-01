@@ -16,9 +16,6 @@ export default function StartScreen({ dispatch }) {
     return (
         <div className='start-screen'>
             <div className='start-content'>
-                <h1 className='game-title'>Welcome to ReefRiches!</h1>
-                <p className='tagline'>Swim through the ocean of financial knowledge!</p>
-
                 <div className='button-group'>
                     <button className='btn-primary' onClick={handleNewGame}>
                         🎮 Play as Guest
@@ -30,6 +27,8 @@ export default function StartScreen({ dispatch }) {
                         </button>
                     )}
                 </div>
+                <p className='tagline'>Swim through the ocean of financial knowledge!</p>
+
 
                 <button className='btn-text' onClick={() => setIsOpen(true)}>
                     Parent/Guardian Info

@@ -77,8 +77,8 @@ body {
 
 /* Button Styles */
 .btn-primary {
-  background: #5abcc3;
-  color: rgb(2, 6, 36);
+  background: #6fdfe7;
+  color: rgb(23, 62, 134);
   padding: 1rem 1rem;
   border-radius: 15px;
   font-size: 1.1rem;
@@ -86,7 +86,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-  border: 2px solid #4390a5;
+  border: 2px solid #1e6876;
 
 }
 
@@ -104,8 +104,8 @@ body {
 
 .btn-secondary {
   background: white;
-  color: #66a4ea;
-  border: 2px solid #66cdea;
+  color: #179fbe;
+  border: 2px solid #1e6876;
   padding: 1rem 2rem;
   border-radius: 10px;
   font-size: 1.1rem;

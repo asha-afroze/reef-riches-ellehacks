@@ -9,7 +9,7 @@
 @font-face {
   font-family: 'FunFont-small-italic';
   /* Use ../ to step out of the 'screens' folder into 'src' */
-  src: url('../assets/fonts/VAG Rounded Next/VAG Rounded Next Regular.ttf') format('truetype');
+  src: url('../assets/fonts/VAG Rounded Next/VAG Rounded Next SemiBold.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -23,7 +23,7 @@
     justify-content: center;
     align-items: center;
 
-    background-image: url("/src/assets/reefriches.jpg");
+    background-image: url("/src/assets/reefriches-updated2.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -38,25 +38,9 @@
 
     max-width: 600px; /* Optional: keeps the wood-sign area from getting too wide */
     width: 90%; /* Responsive width */
+    margin-top: 60px;
 }
 
-.game-title {
-  font-family: 'FunFont', sans-serif; /* Ensuring your custom font is used */
-  font-size: 3rem;
-  color: #64ade0; /* White text acts as the "bulb" of the neon light */
-  
-  /* Layered shadows create the glow effect */
-  text-shadow:
-    0 0 7px #fff,
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #00d4ff, /* Vibrant cyan/blue */
-    0 0 82px #00d4ff,
-    0 0 92px #00d4ff;
-  
-  margin-bottom: 0.5rem;
-  text-align: center;
-}
 
 @keyframes swim {
     0%,
@@ -69,9 +53,9 @@
 }
 
 .tagline {
-  font-size: 1.2rem;
-  color: #030a4e;
-  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  color: #bdfdff;
+  margin-bottom: 0.2rem;
   font-family: 'FunFont-small-italic', sans-serif;
 }
 
