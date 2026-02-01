@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Levelscreen.css";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Questions for each section and level
-const questions = {
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+
+const fallbackQuestions = {
     saving: {
         1: {
             prompt: "_____ means keeping some money for later.",
@@ -90,8 +93,53 @@ export default function LevelScreen({ state, dispatch }) {
     const { currentSection, currentLevel } = state;
     const [selectedChoice, setSelectedChoice] = useState(null);
     const [showFeedback, setShowFeedback] = useState(false);
+    
+    const [genQuestion, setGenQuestion] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const question = questions[currentSection]?.[currentLevel] || {
+    useEffect(() => {
+        setSelectedChoice(null);
+        setShowFeedback(false);
+        setGenQuestion(null);
+
+        const fetchQuestion = async () => {
+            if (!genAI) return;
+            
+            setLoading(true);
+            try {
+                const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+                
+                const prompt = `Generate a fill-in-the-blank question about financial literacy topic "${currentSection}" for a 10-year-old kid. 
+                Level difficulty: ${currentLevel}/5.
+                Return ONLY valid JSON with this format:
+                {
+                    "prompt": "The question text with _____ for the blank",
+                    "choices": ["Wrong Answer", "Correct Answer", "Wrong Answer"],
+                    "correct": 1
+                }
+                Ensure the correct index matches the correct choice position (0, 1, or 2).`;
+
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+                
+                const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
+                const data = JSON.parse(jsonStr);
+
+                if (data.prompt && data.choices && typeof data.correct === 'number') {
+                    setGenQuestion(data);
+                }
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchQuestion();
+    }, [currentSection, currentLevel]);
+
+    const question = genQuestion || fallbackQuestions[currentSection]?.[currentLevel] || {
         prompt: "Fill in the blank!",
         choices: ["Option 1", "Option 2", "Option 3"],
         correct: 0,
@@ -117,60 +165,69 @@ export default function LevelScreen({ state, dispatch }) {
                     <span className='section-name'>{currentSection}</span>
                 </div>
 
-                <h2 className='question-prompt'>{question.prompt}</h2>
-
-                <div className='choices-container'>
-                    {question.choices.map((choice, index) => (
-                        <button
-                            key={index}
-                            className={`choice-btn ${
-                                selectedChoice === index
-                                    ? showFeedback && isCorrect
-                                        ? "correct"
-                                        : showFeedback
-                                          ? "incorrect"
-                                          : "selected"
-                                    : ""
-                            }`}
-                            onClick={() => handleChoiceClick(index)}
-                            disabled={showFeedback}
-                        >
-                            {choice}
-                        </button>
-                    ))}
-                </div>
-
-                {showFeedback && (
-                    <div className={`feedback ${isCorrect ? "correct" : "incorrect"}`}>
-                        {isCorrect ? (
-                            <>
-                                <span className='feedback-icon'>✅</span>
-                                <p>Nice! You got it!</p>
-                            </>
-                        ) : (
-                            <>
-                                <span className='feedback-icon'>💡</span>
-                                <p>Not quite! Try again - look for the bold word in the lesson!</p>
-                            </>
-                        )}
+                {loading ? (
+                     <div className="loading-container">
+                        <span className="loading-spinner">🌊</span>
+                        <p>Asking the Ocean Oracle...</p>
                     </div>
-                )}
+                ) : (
+                    <>
+                        <h2 className='question-prompt'>{question.prompt}</h2>
 
-                <div className='level-actions'>
-                    {showFeedback ? (
-                        <button className='btn-primary' onClick={handleSubmit}>
-                            {isCorrect ? "Continue" : "Try Again"}
-                        </button>
-                    ) : (
-                        <button
-                            className='btn-primary'
-                            disabled={selectedChoice === null}
-                            onClick={() => setShowFeedback(true)}
-                        >
-                            Check Answer
-                        </button>
-                    )}
-                </div>
+                        <div className='choices-container'>
+                            {question.choices.map((choice, index) => (
+                                <button
+                                    key={index}
+                                    className={`choice-btn ${
+                                        selectedChoice === index
+                                            ? showFeedback && isCorrect
+                                                ? "correct"
+                                                : showFeedback
+                                                ? "incorrect"
+                                                : "selected"
+                                            : ""
+                                    }`}
+                                    onClick={() => handleChoiceClick(index)}
+                                    disabled={showFeedback}
+                                >
+                                    {choice}
+                                </button>
+                            ))}
+                        </div>
+
+                        {showFeedback && (
+                            <div className={`feedback ${isCorrect ? "correct" : "incorrect"}`}>
+                                {isCorrect ? (
+                                    <>
+                                        <span className='feedback-icon'>✅</span>
+                                        <p>Nice! You got it!</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className='feedback-icon'>💡</span>
+                                        <p>Not quite! Try again!</p>
+                                    </>
+                                )}
+                            </div>
+                        )}
+
+                        <div className='level-actions'>
+                            {showFeedback ? (
+                                <button className='btn-primary' onClick={handleSubmit}>
+                                    {isCorrect ? "Continue" : "Try Again"}
+                                </button>
+                            ) : (
+                                <button
+                                    className='btn-primary'
+                                    disabled={selectedChoice === null}
+                                    onClick={() => setShowFeedback(true)}
+                                >
+                                    Check Answer
+                                </button>
+                            )}
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
