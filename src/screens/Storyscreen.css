@@ -1,16 +1,37 @@
 .story-screen {
+  /* 1. Make it fill the viewport */
   width: 100%;
-  max-width: 700px;
-  text-align: center;
+  min-height: 100vh;
+  
+  /* 2. Center the content box inside the full-screen background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 3. The Background Setup */
+  background-image: url("/src/assets/storylinebg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Prevent scrolling if the glow or bounce effects get wild */
+  overflow: hidden; 
 }
 
-
 .story-content {
-  background: white;
+  /* 4. Move the max-width here so the text stays readable */
+  width: 90%;
+  max-width: 700px;
+  
+  /* 5. Add a semi-transparent background so we can see the reef behind it */
+  background: rgba(255, 255, 255, 0.9); 
+  backdrop-filter: blur(5px); /* Optional: makes it look like frosted glass */
+  
   padding: 3rem 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  min-height: 400px;
+  border-radius: 30px; /* Rounder corners for a friendlier feel */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

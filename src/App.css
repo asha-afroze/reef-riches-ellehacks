@@ -57,8 +57,8 @@ body {
 /* Button Styles */
 .btn-primary {
   background: #f5e2c7;
-  color: rgb(96, 41, 16);
-  border: 2px solid #b06c0e;
+  color: rgb(255, 255, 255);
+  border: 2px solid #ffffff;
   padding: 1rem 1rem;
   border-radius: 15px;
   font-size: 1.1rem;

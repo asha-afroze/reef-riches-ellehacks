@@ -1,22 +1,43 @@
-.map-screen {
+/* .map-screen {
   width: 100%;
   max-width: 1200px;
+  
+} */
+
+.map-screen {
+  /* 1. Make it fill the viewport */
+  width: 100%;
+  min-height: 100vh;
   text-align: center;
+
+  /* 3. The Background Setup */
+  background-image: url("/src/assets/roadmap.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Prevent scrolling if the glow or bounce effects get wild */
+  overflow: hidden; 
 }
 
 .map-title {
+  margin-top: 100px;
+
   font-size: 2.5rem;
   color: white;
   margin-bottom: 0.5rem;
 }
 
 .map-subtitle {
+  padding-top: 140px;
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 3rem;
 }
 
 .sections-grid {
+  margin-top: 100px;
+
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
@@ -24,11 +45,10 @@
 }
 
 .section-card {
-  background: white;
+  margin-top: 140px;
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  border: 3px solid #ddd;
+
   transition: transform 0.3s ease;
 }
 
@@ -45,17 +65,34 @@
 
 .section-emoji {
   font-size: 3rem;
+  text-align: center;
 }
 
 .section-name {
   font-size: 1.5rem;
-  color: #333;
+  color: #000000;
 }
 
 .section-stats {
   margin-bottom: 1.5rem;
+  margin-left: 100px;
+  width: 220px; /* Slightly wider to give bars room */
+  
+  /* The Glass Effect */
+  background: rgba(255, 255, 255, 0.4); /* White at 40% opacity */
+  backdrop-filter: blur(8px);           /* This blurs the roadmap image behind it */
+  -webkit-backdrop-filter: blur(8px);    /* Support for Safari */
+  
+  padding: 1.2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(206, 207, 255, 0.951); 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  
+  /* Ensures everything inside is centered */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 .stat-row {
   display: flex;
   justify-content: space-between;
@@ -82,7 +119,7 @@
 
 .hp-fill {
   height: 100%;
-  background: linear-gradient(90deg, #ff6b6b, #ff8787);
+  background: linear-gradient(90deg, #f43d3d, #fc7070);
   transition: width 0.5s ease;
   border-radius: 10px;
 }
@@ -116,3 +153,12 @@
     transform: scale(1.05);
   }
 }
+
+.section-stats .stat-row span {
+  font-family: 'FunFont', sans-serif; /* Keep it consistent with your game brand */
+  font-size: 0.95rem;
+  font-weight: 700;        /* Make it bold to pop against the blur */
+  color: #2562bd;          /* A deep ocean blue for better contrast than grey */
+  letter-spacing: 0.5px;
+}
+
