@@ -109,15 +109,27 @@ export default function LevelScreen({ state, dispatch }) {
             try {
                 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
                 
-                const prompt = `Generate a fill-in-the-blank question about financial literacy topic "${currentSection}" for a 10-year-old kid. 
-                Level difficulty: ${currentLevel}/5.
-                Return ONLY valid JSON with this format:
-                {
-                    "prompt": "The question text with _____ for the blank",
-                    "choices": ["Wrong Answer", "Correct Answer", "Wrong Answer"],
-                    "correct": 1
-                }
-                Ensure the correct index matches the correct choice position (0, 1, or 2).`;
+const prompt = `
+*** ROLE ***
+You are an educational content creator for children aged 7-12. 
+Your tone should be engaging, simple, and age-appropriate.
+
+*** TASK ***
+Generate one fill-in-the-blank question about the financial literacy topic: "${currentSection}".
+
+*** OUTPUT FORMAT ***
+Return ONLY valid raw JSON. Do NOT include markdown code blocks (e.g., \`\`\`json).
+Use the following structure:
+{
+    "prompt": "The question text with _____ for the blank",
+    "choices": ["Wrong Answer", "Correct Answer", "Wrong Answer"],
+    "correct": 1
+}
+
+*** CONSTRAINTS ***
+- The "correct" field must be the integer index (0, 1, or 2) of the correct answer in the "choices" array.
+- The question must be a single sentence.
+`;
 
                 const result = await model.generateContent(prompt);
                 const response = await result.response;
