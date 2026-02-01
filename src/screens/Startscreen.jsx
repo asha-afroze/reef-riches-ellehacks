@@ -38,9 +38,17 @@ export default function StartScreen({ dispatch }) {
                         <div className='modal' onClick={e => e.stopPropagation()}>
                             <h2>Parent / Guardian Info</h2>
                             <p>
-                                This section contains important privacy and consent information for parents and
-                                guardians.
+                                Your child’s privacy and safety are very important to us. This game was designed with transparency in mind, so parents and guardians can clearly understand how information is handled. We collect only the minimum data needed to support gameplay and learning progress, and we do not sell or share personal information with third parties.
                             </p>
+                            <p>-</p>
+                            <p>
+                                Any content created during play is used solely to improve the learning experience within the game. No sensitive personal details are required to play. Parental awareness and consent are encouraged before a child begins, and parents may review or request deletion of their child’s data at any time.
+                            </p>
+                            <p>-</p>
+                            <p>
+                                Our goal is to create a fun, educational environment where children can learn about financial literacy; while parents can feel confident their privacy is respected.
+                            </p>
+                            <p>-</p>
 
                             <button onClick={() => setIsOpen(false)}>Close</button>
                         </div>

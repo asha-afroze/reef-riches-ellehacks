@@ -40,7 +40,19 @@
 .story-emoji {
   font-size: 4rem;
   margin-bottom: 2rem;
+  animation: swim 3s ease-in-out infinite; 
+
+  
 }
+
+
+
+
+
+
+
+
+
 
 .story-text {
   font-size: 1.4rem;
@@ -72,3 +84,4 @@
   background: #667eea;
   transform: scale(1.3);
 }
+

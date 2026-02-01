@@ -1,14 +1,41 @@
 .result-screen {
+  /* 1. Make it fill the viewport */
   width: 100%;
-  max-width: 700px;
+  min-height: 100vh;
+  
+  /* 2. Center the content box inside the full-screen background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 3. The Background Setup */
+  background-image: url("/src/assets/results-screen-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Prevent scrolling if the glow or bounce effects get wild */
+  overflow: hidden; 
 }
 
 .result-content {
-  background: white;
-  padding: 0.5rem 1rem 1rem 0.5rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 700px;
+  
+  /* 5. Add a semi-transparent background so we can see the reef behind it */
+  background: rgb(255, 255, 255); 
+  backdrop-filter: blur(5px); /* Optional: makes it look like frosted glass */
+  
+  padding: 3rem 2rem;
+  border-radius: 30px; /* Rounder corners for a friendlier feel */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
 }
 
 .battle-animation {
@@ -52,8 +79,8 @@
 }
 
 .shark-img {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
   animation: hurt 0.5s ease-in-out;
 }

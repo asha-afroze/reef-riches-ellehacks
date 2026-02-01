@@ -1,22 +1,23 @@
 import { useState } from "react";
 import "./Storyscreen.css";
 
+
 const storyPages = [
     {
         text: "In the colorful reef, all the fish lived happily...",
-        emoji: "🐠🌊",
+        emoji: "°‧ 𓆝 𓆟 𓆞 ·｡",
     },
     {
         text: "Until the Loan Sharks arrived! They're stealing everyone's financial freedom!",
-        emoji: "🦈💰",
+        emoji: "★ ᯓ 🦈 ᯓ ★",
     },
     {
         text: "But you can stop them! Learn about money to become a Finance Pro!",
-        emoji: "⭐🎓",
+        emoji: ". ݁₊ ⊹ . ݁ 💸 ⊹ ₊ ݁.",
     },
     {
         text: "Collect 3 badges by mastering Saving, Spending, and Money Management!",
-        emoji: "🏅🏅🏅",
+        emoji: "⋆｡𖦹˚｡🌟 🌟 🌟⋆｡𖦹°｡",
     },
 ];
 

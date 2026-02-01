@@ -1,14 +1,40 @@
 .learn-screen {
+  /* 1. Make it fill the viewport */
   width: 100%;
-  max-width: 700px;
+  min-height: 100vh;
+  
+  /* 2. Center the content box inside the full-screen background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 3. The Background Setup */
+  background-image: url("/src/assets/storylinebg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Prevent scrolling if the glow or bounce effects get wild */
+  overflow: hidden; 
 }
 
 .learn-content {
-  background: white;
+  /* 4. Move the max-width here so the text stays readable */
+  width: 90%;
+  max-width: 700px;
+  
+  /* 5. Add a semi-transparent background so we can see the reef behind it */
+  background: rgb(255, 255, 255); 
+  backdrop-filter: blur(5px); /* Optional: makes it look like frosted glass */
+  
   padding: 3rem 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border-radius: 30px; /* Rounder corners for a friendlier feel */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .level-badge {
@@ -47,10 +73,67 @@
   font-weight: 700;
 }
 
+/* Video Section Styles */
+.video-section {
+  background: #667eea;
+  padding: 1rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.video-header {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.video-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  color: #667eea;
+  padding: 0.6rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.video-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background: #f8f9fa;
+}
+
+.play-icon {
+  font-size: 1.2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
 .learn-fish {
   font-size: 3rem;
   margin: 2rem 0;
   animation: swim 2s ease-in-out infinite;
+}
+
+.learn-fish img {
+  width: 200px;
+  height: auto;
 }
 
 .learn-content .btn-primary {
