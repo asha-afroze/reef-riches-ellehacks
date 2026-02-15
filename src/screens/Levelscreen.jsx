@@ -5,6 +5,7 @@ import lessonContent from "../data/lessonContent.json";
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+const questionCache = {};
 
 const fallbackQuestions = {
     saving: {
@@ -103,16 +104,36 @@ export default function LevelScreen({ state, dispatch }) {
         setShowFeedback(false);
         setGenQuestion(null);
 
+        let ignore = false;
+        const key = `${currentSection}-${currentLevel}`;
+
         const fetchQuestion = async () => {
             if (!genAI) return;
             
+            if (questionCache[key]) {
+                setLoading(true);
+                try {
+                    const data = await questionCache[key];
+                    if (!ignore && data) {
+                         if (data.prompt && data.choices && typeof data.correct === 'number') {
+                             setGenQuestion(data);
+                         }
+                    }
+                } catch (error) {
+                    console.error("Cached request failed:", error);
+                } finally {
+                    if (!ignore) setLoading(false);
+                }
+                return;
+            }
+
             setLoading(true);
-            try {
+            
+            const requestPromise = (async () => {
                 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-                
                 const lesson = lessonContent[currentSection]?.[currentLevel];
                 
-const prompt = `
+                const prompt = `
 *** ROLE ***
 You are an educational content creator for children aged 7-12. 
 Your tone should be engaging, simple, and age-appropriate.
@@ -139,25 +160,32 @@ Use the following structure:
 - The "correct" field must be the integer index (0, 1, or 2) of the correct answer in the "choices" array.
 - The question must be a single sentence.
 `;
-
                 const result = await model.generateContent(prompt);
                 const response = await result.response;
                 const text = response.text();
                 
                 const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
-                const data = JSON.parse(jsonStr);
+                return JSON.parse(jsonStr);
+            })();
 
-                if (data.prompt && data.choices && typeof data.correct === 'number') {
+            questionCache[key] = requestPromise;
+
+            try {
+                const data = await requestPromise;
+                if (!ignore && data.prompt && data.choices && typeof data.correct === 'number') {
                     setGenQuestion(data);
                 }
             } catch (error) {
                 console.error("Gemini API Error:", error);
+                delete questionCache[key];
             } finally {
-                setLoading(false);
+                if (!ignore) setLoading(false);
             }
         };
 
         fetchQuestion();
+        
+        return () => { ignore = true; };
     }, [currentSection, currentLevel]);
 
     const question = genQuestion || fallbackQuestions[currentSection]?.[currentLevel] || {
